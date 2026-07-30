@@ -1,10 +1,14 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-import os
+from pathlib import Path
 
 app = FastAPI(title="ParsGuard")
 
-templates = Jinja2Templates(directory="templates")
+BASE_DIR = Path(__file__).resolve().parent
+
+templates = Jinja2Templates(
+    directory=str(BASE_DIR / "templates")
+)
 
 
 @app.get("/")
@@ -15,11 +19,11 @@ def home():
 @app.get("/login/")
 def login_page(request: Request):
     return templates.TemplateResponse(
-    name="login.html",
-    context={
-        "request": request
-    }
-)
+        "login.html",
+        {
+            "request": request
+        }
+    )
 
 
 @app.post("/login/")
