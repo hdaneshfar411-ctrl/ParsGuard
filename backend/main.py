@@ -20,9 +20,12 @@ def login_page(request: Request):
     )
 
 
+from fastapi.responses import RedirectResponse
+
+
 @app.post("/login/")
 def login(username: str = Form(...), password: str = Form(...)):
     if username == "admin" and password == "admin":
-        return {"message": "Login successful"}
+        return RedirectResponse("/panel/", status_code=303)
 
     return {"message": "Wrong username or password"}
