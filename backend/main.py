@@ -1,10 +1,7 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse
-
 
 app = FastAPI(title="ParsGuard")
-
 
 templates = Jinja2Templates(directory="backend/templates")
 
@@ -32,10 +29,9 @@ def login(
     password: str = Form(...)
 ):
     if username == "admin" and password == "admin":
-        return RedirectResponse(
-            "/panel/",
-            status_code=303
-        )
+        return {
+            "message": "Login successful"
+        }
 
     return {
         "message": "Wrong username or password"
