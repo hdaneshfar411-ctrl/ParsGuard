@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
+import os
 
 app = FastAPI(title="ParsGuard")
 
-templates = Jinja2Templates(directory="backend/templates")
+templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
