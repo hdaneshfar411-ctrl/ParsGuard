@@ -3,9 +3,7 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI(title="ParsGuard")
 
-templates = Jinja2Templates(
-    directory="backend/templates"
-)
+templates = Jinja2Templates(directory="backend/templates")
 
 
 @app.get("/")
@@ -19,7 +17,5 @@ def home():
 def login(request: Request):
     return templates.TemplateResponse(
         "login.html",
-        {
-            "request": request
-        }
+        {"request": request}
     )
