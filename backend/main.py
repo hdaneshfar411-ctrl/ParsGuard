@@ -15,11 +15,11 @@ def home():
 @app.get("/login/")
 def login_page(request: Request):
     return templates.TemplateResponse(
-        "login.html",
-        {
-            "request": request
-        }
-    )
+    name="login.html",
+    context={
+        "request": request
+    }
+)
 
 
 @app.post("/login/")
