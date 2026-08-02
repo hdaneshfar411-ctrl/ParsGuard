@@ -1,1 +1,1 @@
-console.log("ParsGuard Loaded");
+console.log("ParsGuard Loaded Successfully");
