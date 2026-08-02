@@ -1,112 +1,132 @@
-from fastapi import FastAPI, Request, Form
-from fastapi.responses import RedirectResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-app = FastAPI(title="ParsGuard")
+<meta charset="UTF-8">
 
-# Static Files
-app.mount("/static", StaticFiles(directory="backend/static"), name="static")
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-# Templates
-templates = Jinja2Templates(directory="backend/templates")
+<title>Users - ParsGuard</title>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-# ---------------- Home ----------------
+<link rel="stylesheet" href="/static/css/style.css">
 
-@app.get("/")
-def home():
-    return RedirectResponse(url="/login/")
+</head>
 
+<body>
 
-# ---------------- Login ----------------
+<div class="d-flex">
 
-@app.get("/login/")
-def login_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="login.html"
-    )
+<div class="sidebar bg-dark text-white p-3">
 
+<h3 class="text-center mb-4">ParsGuard</h3>
 
-@app.post("/login/")
-def login(
-    username: str = Form(...),
-    password: str = Form(...)
-):
+<div class="list-group">
 
-    if username == "admin" and password == "admin":
-        return RedirectResponse(
-            url="/panel/",
-            status_code=303
-        )
+<a href="/panel/" class="list-group-item list-group-item-action">
+Dashboard
+</a>
 
-    return RedirectResponse(
-        url="/login/",
-        status_code=303
-    )
+<a href="/users/" class="list-group-item list-group-item-action active">
+Users
+</a>
 
+<a href="/servers/" class="list-group-item list-group-item-action">
+Servers
+</a>
 
-# ---------------- Dashboard ----------------
+<a href="/settings/" class="list-group-item list-group-item-action">
+Settings
+</a>
 
-@app.get("/panel/")
-def panel(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="panel.html",
-        context={
-            "username": "Admin"
-        }
-    )
+</div>
 
+</div>
 
-# ---------------- Users ----------------
+<div class="flex-grow-1">
 
-@app.get("/users/")
-def users(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="users.html",
-        context={
-            "username": "Admin"
-        }
-    )
+<nav class="navbar navbar-light bg-white shadow-sm px-4">
 
+<h4>Users</h4>
 
-# ---------------- Servers ----------------
+<button class="btn btn-success">
+Add User
+</button>
 
-@app.get("/servers/")
-def servers(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="servers.html",
-        context={
-            "username": "Admin"
-        }
-    )
+</nav>
 
+<div class="container-fluid mt-4">
 
-# ---------------- Logs ----------------
+<div class="card">
 
-@app.get("/logs/")
-def logs(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="logs.html",
-        context={
-            "username": "Admin"
-        }
-    )
+<div class="card-header">
 
+All Users
 
-# ---------------- Settings ----------------
+</div>
 
-@app.get("/settings/")
-def settings(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="settings.html",
-        context={
-            "username": "Admin"
-        }
-    )
+<div class="card-body">
+
+<table class="table table-hover">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Username</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>1</td>
+
+<td>admin</td>
+
+<td>
+
+<span class="badge bg-success">
+Active
+</span>
+
+</td>
+
+<td>
+
+<button class="btn btn-danger btn-sm">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
