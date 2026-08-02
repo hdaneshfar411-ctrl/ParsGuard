@@ -2,69 +2,143 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>ParsGuard Dashboard</title>
 
-    <link rel="stylesheet" href="/static/css/style.css">
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ParsGuard Dashboard</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 <div class="sidebar">
 
-    <h2>ParsGuard</h2>
+<div class="logo">
 
-    <a href="#">🏠 Dashboard</a>
-
-    <a href="#">👥 Users</a>
-
-    <a href="#">🛡️ Security</a>
-
-    <a href="#">📊 Logs</a>
-
-    <a href="#">⚙ Settings</a>
+<h2>🛡 ParsGuard</h2>
 
 </div>
 
-<div class="content">
+<ul>
 
-    <div class="topbar">
+<li class="active">🏠 Dashboard</li>
 
-        <h1>Dashboard</h1>
+<li>👥 Users</li>
 
-        <span>Welcome Admin</span>
+<li>🌐 Servers</li>
 
-    </div>
+<li>📈 Statistics</li>
 
-    <div class="cards">
+<li>📜 Logs</li>
 
-        <div class="card">
+<li>⚙ Settings</li>
 
-            <h2>Users</h2>
-
-            <p>154</p>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Servers</h2>
-
-            <p>5</p>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Threats</h2>
-
-            <p>2</p>
-
-        </div>
-
-    </div>
+</ul>
 
 </div>
+
+<div class="main">
+
+<div class="navbar">
+
+<h1>Dashboard</h1>
+
+<div class="profile">
+
+<span>{{ username }}</span>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Users</h3>
+
+<h1>0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Servers</h3>
+
+<h1>1</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Status</h3>
+
+<h1>🟢 Online</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Traffic</h3>
+
+<h1>0 GB</h1>
+
+</div>
+
+</div>
+
+<div class="table-box">
+
+<h2>Recent Activity</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>User</th>
+
+<th>IP</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>admin</td>
+
+<td>127.0.0.1</td>
+
+<td>✅ Online</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="/static/js/script.js"></script>
 
 </body>
+
 </html>
