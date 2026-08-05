@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="cards">
+
+    <div class="card">
+
+        <h3>Total Users</h3>
+
+        <h1>0</h1>
+
+        <span>No users yet</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Servers</h3>
+
+        <h1>1</h1>
+
+        <span>Healthy</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Traffic</h3>
+
+        <h1>0 GB</h1>
+
+        <span>Today</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Status</h3>
+
+        <h1 class="online">Online</h1>
+
+        <span>ParsGuard Running</span>
+
+    </div>
+
+</div>
+
+<div class="section">
+
+    <div class="section-header">
+
+        <h2>Recent Activity</h2>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>User</th>
+
+                <th>IP</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>admin</td>
+
+                <td>127.0.0.1</td>
+
+                <td>Online</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
