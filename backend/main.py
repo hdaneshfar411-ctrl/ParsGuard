@@ -1,4 +1,5 @@
-from database import init_db
+from .database import init_db
+
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -7,12 +8,12 @@ from fastapi.templating import Jinja2Templates
 app = FastAPI(title="ParsGuard")
 
 init_db()
+
 # Static Files
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
 # Templates
 templates = Jinja2Templates(directory="backend/templates")
-
 
 # ===========================
 # Home
@@ -32,9 +33,7 @@ def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="login.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
 
@@ -49,10 +48,7 @@ def login(
     password: str = Form(...)
 ):
     if username == "admin" and password == "admin":
-        return RedirectResponse(
-            url="/panel",
-            status_code=303
-        )
+        return RedirectResponse(url="/panel", status_code=303)
 
     return templates.TemplateResponse(
         request=request,
@@ -97,77 +93,51 @@ def users(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="users.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
-
-# ===========================
-# Servers
-# ===========================
 
 @app.get("/servers")
 def servers(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="servers.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
-
-# ===========================
-# Configs
-# ===========================
 
 @app.get("/configs")
 def configs(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="configs.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
-
-# ===========================
-# Logs
-# ===========================
 
 @app.get("/logs")
 def logs(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="logs.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
-
-# ===========================
-# Settings
-# ===========================
 
 @app.get("/settings")
 def settings(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="settings.html",
-        context={
-            "request": request
-        }
+        context={"request": request}
     )
 
 
 # ===========================
-# Logout
+# Users Add
 # ===========================
-from fastapi import Form
-from database import get_db
+
+from .database import get_db
 
 
 @app.get("/users/add")
@@ -187,7 +157,6 @@ def add_user(
     traffic: int = Form(...),
     expire: int = Form(...)
 ):
-
     db = get_db()
 
     db.execute(
@@ -210,8 +179,8 @@ def add_user(
     db.close()
 
     return RedirectResponse("/users", status_code=303)
+
+
 @app.get("/logout")
 def logout():
-    return RedirectResponse(
-        url="/login",
-        status_code=303)
+    return RedirectResponse(url="/login", status_code=303)
