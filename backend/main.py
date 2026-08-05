@@ -1,3 +1,4 @@
+from database import init_db
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -5,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI(title="ParsGuard")
 
+init_db()
 # Static Files
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
@@ -164,7 +166,50 @@ def settings(request: Request):
 # ===========================
 # Logout
 # ===========================
+from fastapi import Form
+from database import get_db
 
+
+@app.get("/users/add")
+def add_user_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="add_user.html",
+        context={"request": request}
+    )
+
+
+@app.post("/users/add")
+def add_user(
+    username: str = Form(...),
+    password: str = Form(...),
+    protocol: str = Form(...),
+    traffic: int = Form(...),
+    expire: int = Form(...)
+):
+
+    db = get_db()
+
+    db.execute(
+        """
+        INSERT INTO users
+        (username,password,protocol,traffic,expire,status)
+        VALUES(?,?,?,?,?,?)
+        """,
+        (
+            username,
+            password,
+            protocol,
+            traffic,
+            expire,
+            "Active"
+        )
+    )
+
+    db.commit()
+    db.close()
+
+    return RedirectResponse("/users", status_code=303)
 @app.get("/logout")
 def logout():
     return RedirectResponse(
