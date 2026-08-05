@@ -62,7 +62,7 @@ def login(
 def panel(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="panel.html",
+        name="dashboard.html"
         context={
             "username": "Admin",
             "users": 0,
