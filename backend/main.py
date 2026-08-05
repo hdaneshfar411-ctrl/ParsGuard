@@ -68,6 +68,9 @@ def login(
 
 @app.get("/panel")
 def panel(request: Request):
+
+    client_ip = request.client.host
+
     return templates.TemplateResponse(
         request=request,
         name="dashboard.html",
@@ -77,7 +80,8 @@ def panel(request: Request):
             "users": 0,
             "servers": 1,
             "traffic": "0 GB",
-            "status": "Online"
+            "status": "Online",
+            "client_ip": client_ip
         }
     )
 
