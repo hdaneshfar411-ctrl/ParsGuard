@@ -96,14 +96,7 @@ def users(request: Request):
         request=request,
         name="users.html",
         context={
-            "request": request,
-            "users": [
-                {
-                    "id": 1,
-                    "username": "admin",
-                    "status": "Active"
-                }
-            ]
+            "request": request
         }
     )
 
