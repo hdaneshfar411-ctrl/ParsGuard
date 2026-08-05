@@ -12,28 +12,34 @@ app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 templates = Jinja2Templates(directory="backend/templates")
 
 
-# -----------------------------
+# ===========================
 # Home
-# -----------------------------
+# ===========================
+
 @app.get("/")
 def home():
     return RedirectResponse(url="/login")
 
 
-# -----------------------------
+# ===========================
 # Login Page
-# -----------------------------
+# ===========================
+
 @app.get("/login")
 def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="login.html"
+        name="login.html",
+        context={
+            "request": request
+        }
     )
 
 
-# -----------------------------
-# Login Check
-# -----------------------------
+# ===========================
+# Login
+# ===========================
+
 @app.post("/login")
 def login(
     request: Request,
@@ -50,20 +56,23 @@ def login(
         request=request,
         name="login.html",
         context={
+            "request": request,
             "error": "Wrong username or password"
         }
     )
 
 
-# -----------------------------
+# ===========================
 # Dashboard
-# -----------------------------
+# ===========================
+
 @app.get("/panel")
 def panel(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="dashboard.html"
+        name="dashboard.html",
         context={
+            "request": request,
             "username": "Admin",
             "users": 0,
             "servers": 1,
@@ -73,15 +82,17 @@ def panel(request: Request):
     )
 
 
-# -----------------------------
+# ===========================
 # Users
-# -----------------------------
+# ===========================
+
 @app.get("/users")
 def users(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="users.html",
         context={
+            "request": request,
             "users": [
                 {
                     "id": 1,
@@ -93,34 +104,72 @@ def users(request: Request):
     )
 
 
-# -----------------------------
+# ===========================
 # Servers
-# -----------------------------
+# ===========================
+
 @app.get("/servers")
 def servers(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="servers.html"
+        name="servers.html",
+        context={
+            "request": request
+        }
     )
 
 
-# -----------------------------
+# ===========================
+# Configs
+# ===========================
+
+@app.get("/configs")
+def configs(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="configs.html",
+        context={
+            "request": request
+        }
+    )
+
+
+# ===========================
+# Logs
+# ===========================
+
+@app.get("/logs")
+def logs(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="logs.html",
+        context={
+            "request": request
+        }
+    )
+
+
+# ===========================
 # Settings
-# -----------------------------
+# ===========================
+
 @app.get("/settings")
 def settings(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="settings.html"
+        name="settings.html",
+        context={
+            "request": request
+        }
     )
 
 
-# -----------------------------
+# ===========================
 # Logout
-# -----------------------------
+# ===========================
+
 @app.get("/logout")
 def logout():
     return RedirectResponse(
         url="/login",
-        status_code=303
-    )
+        status_code=303)
